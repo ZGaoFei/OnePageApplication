@@ -1,34 +1,30 @@
 package com.zgf.onepageapplication.presenter;
 
-import android.util.Log;
-
+import com.zgf.onepageapplication.base.RxPresenter;
 import com.zgf.onepageapplication.contract.MainContract;
 import com.zgf.onepageapplication.model.Tea;
 import com.zgf.onepageapplication.net.RetrofitHelper;
 
+import javax.inject.Inject;
+
+import rx.Subscription;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
  * 表示器
  */
-public class MainPresenter implements MainContract.Presenter{
+public class MainPresenter extends RxPresenter<MainContract.View> implements MainContract.Presenter{
     private RetrofitHelper retrofitHelper;
-    private MainContract.View view;
 
-    public MainPresenter(MainContract.View view) {
-        retrofitHelper = new RetrofitHelper();
-        this.view = view;
-        view.setPresenter(this);
-    }
-
+    @Inject
     public MainPresenter(RetrofitHelper retrofitHelper) {
         this.retrofitHelper = retrofitHelper;
     }
 
     @Override
-    public void getTeaContent(String apiKey, String format, String method) {
-        retrofitHelper
+    public void getTeaContent(String apiKey, String format, final String method) {
+        Subscription subscribe = retrofitHelper
                 .getTea(apiKey,
                         format,
                         method)
@@ -37,23 +33,14 @@ public class MainPresenter implements MainContract.Presenter{
                 .subscribe(new Action1<Tea>() {
                     @Override
                     public void call(Tea tea) {
-                        view.showContent(tea);
+                        mView.showContent(tea);
                     }
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
-                        Log.e("=======", throwable.getMessage());
+                        mView.showError(throwable.getMessage());
                     }
                 });
-    }
-
-    @Override
-    public void subscribe() {
-
-    }
-
-    @Override
-    public void unSubscribe() {
-
+        addSubscribe(subscribe);
     }
 }

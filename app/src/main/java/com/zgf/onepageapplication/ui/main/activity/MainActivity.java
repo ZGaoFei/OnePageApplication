@@ -15,40 +15,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements MainContract.View{
+public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View{
     @BindView(R.id.recycle_view)
     RecyclerView recyclerView;
     private MainAdapter adapter;
     private List<Tea.DataBean> list;
 
-    private MainContract.Presenter presenter;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
-        initData();
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.unSubscribe();
+    protected void initInject() {
+        getActivityComponent().inject(this);
     }
 
-    protected void initData() {
-        new MainPresenter(this);
+    @Override
+    protected int getLayout() {
+        return R.layout.activity_main;
+    }
 
-        presenter.getTeaContent("b4f4ee31a8b9acc866ef2afb754c33e6", "json", "news.getSlideshow");
+    @Override
+    protected void initEventAndData() {
+        mPresenter.getTeaContent("b4f4ee31a8b9acc866ef2afb754c33e6", "json", "news.getSlideshow");
 
         list = new ArrayList<>();
         adapter = new MainAdapter(this, list);
@@ -62,7 +53,7 @@ public class MainActivity extends BaseActivity implements MainContract.View{
     }
 
     @Override
-    public void setPresenter(MainContract.Presenter presenter) {
-        this.presenter = presenter;
+    public void showError(String msg) {
+        showError(msg);
     }
 }
