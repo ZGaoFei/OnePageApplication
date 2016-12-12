@@ -4,8 +4,8 @@ package com.zgf.onepageapplication.base;
  * Created by zgf on 2016/12/6.
  */
 
-public interface BasePresenter {
-    void subscribe();
+public interface BasePresenter<T extends BaseView> {
+    void attachView(T view);
 
-    void unSubscribe();
+    void detachView();
 }

@@ -10,12 +10,11 @@ import com.zgf.onepageapplication.model.Tea;
 
 public interface MainContract {
 
-    interface View extends BaseView<Presenter> {
-
+    interface View extends BaseView {
         void showContent(Tea tea);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter extends BasePresenter<View> {
         void getTeaContent(String apiKey, String format, String method);
     }
 }
