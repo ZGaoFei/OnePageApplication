@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.zgf.onepageapplication.app.MyApplication;
 import com.zgf.onepageapplication.dagger.component.ActivityComponent;
 import com.zgf.onepageapplication.dagger.component.DaggerActivityComponent;
-import com.zgf.onepageapplication.dagger.model.ActivityModel;
+import com.zgf.onepageapplication.dagger.module.ActivityModule;
 
 import javax.inject.Inject;
 
@@ -73,8 +73,8 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
                 .build();
     }
 
-    protected ActivityModel getActivityModel() {
-        return new ActivityModel(context);
+    protected ActivityModule getActivityModel() {
+        return new ActivityModule(context);
     }
 
     public void showError(String error) {

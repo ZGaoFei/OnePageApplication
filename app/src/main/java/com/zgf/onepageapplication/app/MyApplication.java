@@ -5,7 +5,7 @@ import android.app.Application;
 
 import com.zgf.onepageapplication.dagger.component.AppComponent;
 import com.zgf.onepageapplication.dagger.component.DaggerAppComponent;
-import com.zgf.onepageapplication.dagger.model.AppModel;
+import com.zgf.onepageapplication.dagger.module.AppModule;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -59,7 +59,7 @@ public class MyApplication extends Application {
     public static AppComponent getAppComponent() {
         return DaggerAppComponent
                 .builder()
-                .appModel(new AppModel(myApplication))
+                .appModel(new AppModule(myApplication))
                 .build();
     }
 }

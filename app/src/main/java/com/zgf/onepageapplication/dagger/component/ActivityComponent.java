@@ -3,7 +3,7 @@ package com.zgf.onepageapplication.dagger.component;
 import android.app.Activity;
 
 import com.zgf.onepageapplication.dagger.ActivityScope;
-import com.zgf.onepageapplication.dagger.model.ActivityModel;
+import com.zgf.onepageapplication.dagger.module.ActivityModule;
 import com.zgf.onepageapplication.ui.main.activity.MainActivity;
 
 import dagger.Component;
@@ -13,7 +13,7 @@ import dagger.Component;
  */
 
 @ActivityScope
-@Component(dependencies = AppComponent.class, modules = ActivityModel.class)
+@Component(dependencies = AppComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
     Activity getActivity();
 

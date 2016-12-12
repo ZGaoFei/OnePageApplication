@@ -1,4 +1,4 @@
-package com.zgf.onepageapplication.dagger.model;
+package com.zgf.onepageapplication.dagger.module;
 
 import com.zgf.onepageapplication.app.MyApplication;
 import com.zgf.onepageapplication.dagger.ContextLife;
@@ -14,10 +14,10 @@ import dagger.Provides;
  */
 
 @Module
-public class AppModel {
+public class AppModule {
     private final MyApplication application;
 
-    public AppModel(MyApplication myApplication) {
+    public AppModule(MyApplication myApplication) {
         this.application = myApplication;
     }
 

@@ -1,4 +1,4 @@
-package com.zgf.onepageapplication.dagger.model;
+package com.zgf.onepageapplication.dagger.module;
 
 import android.app.Activity;
 
@@ -12,10 +12,10 @@ import dagger.Provides;
  */
 
 @Module
-public class ActivityModel {
+public class ActivityModule {
     Activity activity;
 
-    public ActivityModel(Activity activity) {
+    public ActivityModule(Activity activity) {
         this.activity = activity;
     }
 
